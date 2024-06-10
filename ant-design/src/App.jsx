@@ -1,12 +1,9 @@
-import Content from "./components/Content/Content";
-import LearnButton from "./components/LearnButton/LearnButton";
-import LearnGird from "./components/LearnGird/LearnGird";
+import LayoutDefault from "./layout/LayoutDefault/LayoutDefault";
+
 function App() {
   return (
     <>
-      {/* <LearnButton />
-      <LearnGird /> */}
-      <Content />
+      <LayoutDefault />
     </>
   );
 }

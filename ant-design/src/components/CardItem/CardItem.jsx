@@ -1,5 +1,6 @@
 import "./CardItem.css";
 function CardItem(props) {
+  // eslint-disable-next-line react/prop-types
   const { title, style } = props;
   return (
     <>
