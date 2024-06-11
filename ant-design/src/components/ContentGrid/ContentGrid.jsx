@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import CardItem from "../CardItem/CardItem";
 // link giao diện : https://enlink.themenate.net/dashboard/default
-function Content() {
+function ContentGird() {
   return (
     <>
       <Row gutter={[20, 20]}>
@@ -58,4 +58,4 @@ function Content() {
     </>
   );
 }
-export default Content;
+export default ContentGird;

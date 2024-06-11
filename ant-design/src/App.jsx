@@ -1,9 +1,9 @@
-import LayoutDefault from "./layout/LayoutDefault/LayoutDefault";
+import AllRoute from "./components/AllRouter/allRourter";
 
 function App() {
   return (
     <>
-      <LayoutDefault />
+      <AllRoute />
     </>
   );
 }

@@ -6,6 +6,7 @@ import {
   BulbOutlined,
   BugOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 function MenuSlider() {
   const items = [
     {
@@ -14,9 +15,9 @@ function MenuSlider() {
       key: "menu-1",
       children: [
         {
-          label: "Menu 1 - 1",
+          label: <Link to="/">Dashboard</Link>,
           icon: <CameraOutlined />,
-          key: "menu-1-1",
+          key: "/",
         },
         {
           label: "Menu 1 - 2",
@@ -52,8 +53,8 @@ function MenuSlider() {
       icon: <SoundOutlined />,
     },
     {
-      label: "Menu 5",
-      key: "menu-5",
+      label: <Link to="/book-room">Book Room</Link>,
+      key: "/book-room",
       icon: <BugOutlined />,
     },
   ];
@@ -64,7 +65,7 @@ function MenuSlider() {
       <Menu
         mode="inline"
         items={items}
-        defaultSelectedKeys={["menu-1-1"]} // active
+        defaultSelectedKeys={["/"]} // active
         defaultOpenKeys={["menu-1"]} // Tự mở
       />
     </>

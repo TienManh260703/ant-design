@@ -5,12 +5,12 @@ import {
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import ContentGird from "../../components/ContentGrid/ContentGrid";
 import "./LayoutDefault.css";
 import logo from "../../assets/logo.png";
 import logoFold from "../../assets/logo-fold.png";
 import Notify from "../../components/Notify/Notify";
 import MenuSlider from "../../components/MenuSlider/MenuSlider";
+import { Outlet } from "react-router-dom";
 
 const { Footer, Sider, Content } = Layout;
 
@@ -50,7 +50,8 @@ function LayoutDefault() {
             <MenuSlider />
           </Sider>
           <Content className="content">
-            <ContentGird />
+            {/* <ContentGird /> */}
+            <Outlet />
           </Content>
         </Layout>
         <Footer className="footer">Forter</Footer>
