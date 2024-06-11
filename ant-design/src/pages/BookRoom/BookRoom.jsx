@@ -1,6 +1,7 @@
-import { Input, Row, Col, Button, Checkbox, Space } from "antd";
+import { Input, Row, Col, Button, Checkbox, DatePicker, Radio } from "antd";
 import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
+const { RangePicker } = DatePicker;
 function BookRoom() {
   const [data, setData] = useState({});
 
@@ -19,6 +20,24 @@ function BookRoom() {
     const object = {
       ...data,
       services: e,
+    };
+    setData(object);
+  };
+
+  const handleChangeRadio = (e) => {
+    const object = {
+      ...data,
+      [e.target.name]: e.target.value,
+    };
+    setData(object);
+  };
+
+  const handleChangeDate = (dates, dateStrings) => {
+    // console.log(dates);
+    // console.log(dateStrings);
+    const object = {
+      ...data,
+      date: dateStrings,
     };
     setData(object);
   };
@@ -82,7 +101,7 @@ function BookRoom() {
         </Col>
         <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
           <p>Dịch vụ thêm</p>
-          <Checkbox.Group name="services" onChange={handleChangeCheckbox}>
+          <Checkbox.Group onChange={handleChangeCheckbox}>
             {/* <Space direction="vertical"> */}
             {/* Cho nằm dọc : vertical */}
             <Checkbox value={"Thuê xe"}>Thuê Xe máy</Checkbox>
@@ -91,6 +110,26 @@ function BookRoom() {
             <Checkbox value={"Chèo thuyền"}>Chèo thuền</Checkbox>
             {/* </Space> */}
           </Checkbox.Group>
+        </Col>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
+          <p>Chọn ngày</p>
+          <RangePicker
+            showTime={true}
+            placeholder={["Ngày đến", "Ngày đi"]}
+            format={"YYYY-DD-MM HH:mm:ss"}
+            onChange={handleChangeDate}
+          />
+        </Col>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
+          <p>Quà tặng</p>
+          <Radio.Group name="gift" onChange={handleChangeRadio}>
+            <Radio checked={true} value={"Áo"}>
+              Áo
+            </Radio>
+            <Radio value={"Mũ"}> Mũ</Radio>
+            <Radio value={"Kem chống nắng"}>Kem chống nắng</Radio>
+            <Radio value={"Dép"}>Dép </Radio>
+          </Radio.Group>
         </Col>
         <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>
           <Button type="primary" onClick={handleSubmit}>
