@@ -1,4 +1,4 @@
-import { Input, Row, Col, Button } from "antd";
+import { Input, Row, Col, Button, Checkbox, Space } from "antd";
 import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 function BookRoom() {
@@ -14,6 +14,14 @@ function BookRoom() {
     setData(object);
   };
   // console.log(data);
+  const handleChangeCheckbox = (e) => {
+    // console.log(e);
+    const object = {
+      ...data,
+      services: e,
+    };
+    setData(object);
+  };
   const handleSubmit = () => {
     console.log("submit data json-server : ", data);
   };
@@ -21,7 +29,7 @@ function BookRoom() {
     <>
       <h2>Đặt phòng</h2>
       <Row gutter={[20, 20]}>
-        <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
           <p>Họ tên</p>
           <Input
             name="fullname"
@@ -33,7 +41,7 @@ function BookRoom() {
             onChange={handleChangeInput}
           />
         </Col>
-        <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
           <p>Số điện thoại</p>
           <Input
             name="phone"
@@ -47,7 +55,7 @@ function BookRoom() {
             onChange={handleChangeInput}
           />
         </Col>
-        <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
           <p>Email</p>
           <Input
             name="email"
@@ -59,8 +67,8 @@ function BookRoom() {
             onChange={handleChangeInput}
           />
         </Col>
-        <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-          <p>Age</p>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
+          <p>Tuổi</p>
           <Input
             name="age"
             placeholder="VD : Tuổi của bạn"
@@ -71,6 +79,18 @@ function BookRoom() {
             suffix={<UserOutlined />}
             onChange={handleChangeInput}
           />
+        </Col>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
+          <p>Dịch vụ thêm</p>
+          <Checkbox.Group name="services" onChange={handleChangeCheckbox}>
+            {/* <Space direction="vertical"> */}
+            {/* Cho nằm dọc : vertical */}
+            <Checkbox value={"Thuê xe"}>Thuê Xe máy</Checkbox>
+            <Checkbox value={"Khác"}> Thuê Ô tô</Checkbox>
+            <Checkbox value={"Ăn trưa"}>Ăn trưa</Checkbox>
+            <Checkbox value={"Chèo thuyền"}>Chèo thuền</Checkbox>
+            {/* </Space> */}
+          </Checkbox.Group>
         </Col>
         <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>
           <Button type="primary" onClick={handleSubmit}>
