@@ -9,6 +9,8 @@ import ContentGird from "../../components/ContentGrid/ContentGrid";
 import "./LayoutDefault.css";
 import logo from "../../assets/logo.png";
 import logoFold from "../../assets/logo-fold.png";
+import Notify from "../../components/Notify/Notify";
+import MenuSlider from "../../components/MenuSlider/MenuSlider";
 
 const { Footer, Sider, Content } = Layout;
 
@@ -38,12 +40,14 @@ function LayoutDefault() {
                 <SearchOutlined />
               </div>
             </div>
-            <div className="header__nav-right">Noi dung</div>
+            <div className="header__nav-right">
+              <Notify />
+            </div>
           </div>
         </header>
         <Layout>
           <Sider className="sider" collapsed={collapsed} theme="light">
-            Sider
+            <MenuSlider />
           </Sider>
           <Content className="content">
             <ContentGird />
