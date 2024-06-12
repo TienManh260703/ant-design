@@ -1,9 +1,44 @@
-import { Input, Row, Col, Button, Checkbox, DatePicker, Radio } from "antd";
+import {
+  Input,
+  Row,
+  Col,
+  Button,
+  Checkbox,
+  DatePicker,
+  Radio,
+  Select,
+} from "antd";
 import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 function BookRoom() {
   const [data, setData] = useState({});
+  const options = [
+    {
+      value: "1",
+      label: "Not Identified",
+    },
+    {
+      value: "2",
+      label: "Closed",
+    },
+    {
+      value: "3",
+      label: "Communicated",
+    },
+    {
+      value: "4",
+      label: "Identified",
+    },
+    {
+      value: "5",
+      label: "Resolved",
+    },
+    {
+      value: "6",
+      label: "Cancelled",
+    },
+  ];
 
   const handleChangeInput = (e) => {
     // console.log(e.target.name);
@@ -38,6 +73,15 @@ function BookRoom() {
     const object = {
       ...data,
       date: dateStrings,
+    };
+    setData(object);
+  };
+
+  const handleChangeSelect = (e) => {
+    // console.log(e);
+    const object = {
+      ...data,
+      kind_of_room: e,
     };
     setData(object);
   };
@@ -130,6 +174,15 @@ function BookRoom() {
             <Radio value={"Kem chống nắng"}>Kem chống nắng</Radio>
             <Radio value={"Dép"}>Dép </Radio>
           </Radio.Group>
+        </Col>
+        <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
+          <p>Loại phòng</p>
+          <Select
+            options={options}
+            style={{ width: 200 }}
+            placeholder="Chọn cái gì đây"
+            onChange={handleChangeSelect}
+          ></Select>
         </Col>
         <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>
           <Button type="primary" onClick={handleSubmit}>
