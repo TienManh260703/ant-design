@@ -16,8 +16,8 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "rooms")
-public class Room {
+@Table(name = "book_room")
+public class BookRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;

@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Component
-public class RoomDTO {
+public class BookRoomDTO {
     @JsonProperty("full_name")
     private String fullName;
 
