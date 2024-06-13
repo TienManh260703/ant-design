@@ -88,9 +88,14 @@ function BookRoom() {
     setData(object);
   };
   const handleSubmit = async () => {
-    console.log(data);
+    // console.log(data);
     const reponse = await createProduct(data);
-    console.log("submit data json-server : ", reponse);
+    // console.log("submit data json-server : ", reponse);
+    if (reponse) {
+      alert("Chúc mừng bạn đăt đặt phòng thành công");
+    } else {
+      alert("Đặt phòng thất bại :(((");
+    }
   };
   return (
     <>
@@ -155,7 +160,7 @@ function BookRoom() {
             <Checkbox value={"Thuê xe"}>Thuê Xe máy</Checkbox>
             <Checkbox value={"Khác"}> Thuê Ô tô</Checkbox>
             <Checkbox value={"Ăn trưa"}>Ăn trưa</Checkbox>
-            <Checkbox value={"Chèo thuyền"}>Chèo thuền</Checkbox>
+            <Checkbox value={"Chèo thuyền"}>Chèo thuyền</Checkbox>
             {/* </Space> */}
           </Checkbox.Group>
         </Col>
