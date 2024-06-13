@@ -10,33 +10,34 @@ import {
 } from "antd";
 import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
+import { createProduct } from "../../service/roomService";
 const { RangePicker } = DatePicker;
 function BookRoom() {
   const [data, setData] = useState({});
   const options = [
     {
       value: "1",
-      label: "Not Identified",
+      label: "1 Giường cơ bản",
     },
     {
       value: "2",
-      label: "Closed",
+      label: "2 Giường cơ bản",
     },
     {
       value: "3",
-      label: "Communicated",
+      label: "1 Giường VIP",
     },
     {
       value: "4",
-      label: "Identified",
+      label: "2 Giương VIP",
     },
     {
       value: "5",
-      label: "Resolved",
+      label: "2 Giường View Biển",
     },
     {
       value: "6",
-      label: "Cancelled",
+      label: "2 Giường View Biển Quảng Cáo",
     },
   ];
 
@@ -69,10 +70,11 @@ function BookRoom() {
 
   const handleChangeDate = (dates, dateStrings) => {
     // console.log(dates);
-    // console.log(dateStrings);
+    console.log(dateStrings[0]);
     const object = {
       ...data,
-      date: dateStrings,
+      start_day: dateStrings[0],
+      end_date: dateStrings[1],
     };
     setData(object);
   };
@@ -81,12 +83,14 @@ function BookRoom() {
     // console.log(e);
     const object = {
       ...data,
-      kind_of_room: e,
+      kind_of_room: parseInt(e),
     };
     setData(object);
   };
-  const handleSubmit = () => {
-    console.log("submit data json-server : ", data);
+  const handleSubmit = async () => {
+    console.log(data);
+    const reponse = await createProduct(data);
+    console.log("submit data json-server : ", reponse);
   };
   return (
     <>
@@ -95,7 +99,7 @@ function BookRoom() {
         <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24}>
           <p>Họ tên</p>
           <Input
-            name="fullname"
+            name="full_name"
             placeholder="VD : Nguyễn Văn A"
             defaultValue={""}
             allowClear={true}
@@ -160,7 +164,7 @@ function BookRoom() {
           <RangePicker
             showTime={true}
             placeholder={["Ngày đến", "Ngày đi"]}
-            format={"YYYY-DD-MM HH:mm:ss"}
+            format={"YYYY-MM-DDTHH:mm:ss"}
             onChange={handleChangeDate}
           />
         </Col>
