@@ -5,6 +5,7 @@ import {
   CameraOutlined,
   BulbOutlined,
   BugOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 function MenuSlider() {
@@ -56,6 +57,11 @@ function MenuSlider() {
       label: <Link to="/book-room">Book Room</Link>,
       key: "/book-room",
       icon: <BugOutlined />,
+    },
+    {
+      label: <Link to="/create-room">Create Room</Link>,
+      key: "/create-room",
+      icon: <PlusCircleOutlined />,
     },
   ];
   return (

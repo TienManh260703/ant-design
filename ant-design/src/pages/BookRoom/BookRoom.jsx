@@ -10,7 +10,7 @@ import {
 } from "antd";
 import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { createProduct } from "../../service/roomService";
+import { createProduct } from "../../service/bookRoomService";
 const { RangePicker } = DatePicker;
 function BookRoom() {
   const [data, setData] = useState({});
