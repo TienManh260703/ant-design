@@ -32,4 +32,11 @@ public class RoomController {
         Room r = roomRepository.save(room);
         return ResponseEntity.status(HttpStatus.OK).body(r);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getRooms() {
+        return ResponseEntity.ok(roomRepository.findAll().stream().map(
+                room -> RoomDTO.builder().build().transRoom(room)
+        ).toList());
+    }
 }

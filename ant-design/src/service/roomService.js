@@ -9,3 +9,13 @@ export const createRoom = async (room) => {
     throw error;
   }
 };
+
+export const getListRoom = async () => {
+  try {
+    const result = await get("rooms");
+    return result;
+  } catch (error) {
+    console.log("Error get room:");
+    throw error;
+  }
+};

@@ -11,15 +11,25 @@ import {
 import { createRoom } from "../../service/roomService";
 const { Option } = Select;
 const CreateRoom = () => {
+  const [form] = Form.useForm();
+
   const handleSubmit = async (values) => {
     // console.log(values);
     const response = await createRoom(values);
     console.log("Room response : ", response);
+    if (response) {
+      form.resetFields();
+    }
   };
   return (
     <>
       <h1>Thêm phòng mới</h1>
-      <Form name="create-room" layout="vertical" onFinish={handleSubmit}>
+      <Form
+        name="create-room"
+        layout="vertical"
+        onFinish={handleSubmit}
+        form={form}
+      >
         <Row gutter={[20, 20]}>
           <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Form.Item

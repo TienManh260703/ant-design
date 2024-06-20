@@ -20,7 +20,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
     String name;
-    @JsonProperty("quantity_bed")
     Integer quantityBed;
     Integer quantityPeople;
     Float price;

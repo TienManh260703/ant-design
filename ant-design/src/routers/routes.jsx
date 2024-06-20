@@ -3,6 +3,7 @@ import BookRoom from "../pages/BookRoom/BookRoom";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Error404 from "../pages/Error404/Error404";
 import CreateRoom from "../pages/CreateRoom/CreateRoom";
+import ListRoom from "../pages/ListRoom/ListRoom";
 export const routes = [
   {
     path: "/",
@@ -19,6 +20,10 @@ export const routes = [
       {
         path: "/create-room",
         element: <CreateRoom />,
+      },
+      {
+        path: "/list-room",
+        element: <ListRoom />,
       },
       {
         path: "*",

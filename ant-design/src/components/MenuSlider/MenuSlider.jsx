@@ -63,6 +63,11 @@ function MenuSlider() {
       key: "/create-room",
       icon: <PlusCircleOutlined />,
     },
+    {
+      label: <Link to="/list-room">List Room</Link>,
+      key: "/list-room",
+      icon: <PlusCircleOutlined />,
+    },
   ];
   return (
     // items : Danh sách menu hiển thị
