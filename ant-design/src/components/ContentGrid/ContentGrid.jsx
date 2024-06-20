@@ -1,8 +1,37 @@
-import { Carousel, Col, Row } from "antd";
+import { Carousel, Col, Row, Collapse } from "antd";
 import CardItem from "../CardItem/CardItem";
 import "./ContentGrid.css";
+
+const { Panel } = Collapse;
 // link giao diện : https://enlink.themenate.net/dashboard/default
 function ContentGird() {
+  const list = [
+    {
+      id: 1,
+      title: "Logo 1 là gì",
+      description: "Mô tả 1",
+    },
+    {
+      id: 2,
+      title: "Logo 2 là gì",
+      description: "Mô tả 2",
+    },
+    {
+      id: 3,
+      title: "Logo 3 là gì",
+      description: "Mô tả 3",
+    },
+    {
+      id: 4,
+      title: "Logo 4 là gì",
+      description: "Mô tả 4",
+    },
+    {
+      id: 5,
+      title: "Logo 5 là gì",
+      description: "Mô tả 5",
+    },
+  ];
   return (
     <>
       <Row gutter={[20, 20]}>
@@ -72,6 +101,14 @@ function ContentGird() {
         <div className="slider-item">4</div>
         <div className="slider-item">5</div>
       </Carousel>
+
+      <Collapse defaultActiveKey={[1]} accordion={true}>
+        {list.map((item) => (
+          <Panel header={item.title} key={item.id}>
+            {item.description}
+          </Panel>
+        ))}
+      </Collapse>
     </>
   );
 }
