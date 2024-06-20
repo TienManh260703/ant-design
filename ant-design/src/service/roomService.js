@@ -19,3 +19,13 @@ export const getListRoom = async () => {
     throw error;
   }
 };
+
+export const deletedRoom = async (id) => {
+  try {
+    const result = await del(`rooms/deleted/${id}`);
+    return result;
+  } catch (error) {
+    console.log("Error deleted room");
+    throw error;
+  }
+};

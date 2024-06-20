@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/v1/rooms")
 @RequiredArgsConstructor
@@ -39,5 +41,16 @@ public class RoomController {
         return ResponseEntity.ok(roomRepository.findAll().stream().map(
                 room -> RoomDTO.builder().build().transRoom(room)
         ).toList());
+    }
+
+    @DeleteMapping("deleted/{id}")
+    public ResponseEntity<?> deleteRoom(@PathVariable String id) {
+        Optional<Room> roomOptional = roomRepository.findById(id);
+        if (roomOptional.isPresent()) {
+            roomRepository.deleteById(id);
+            return ResponseEntity.ok("Success");
+
+        }
+        return ResponseEntity.ok("Error");
     }
 }
