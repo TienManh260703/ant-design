@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getListRoom } from "../../service/roomService";
-import { Card, Row, Col, Badge, Tag } from "antd";
+import { Card, Row, Col, Badge, Tag, Carousel } from "antd";
 
 function ListRoom() {
   const [rooms, setRooms] = useState([]);
@@ -28,10 +28,15 @@ function ListRoom() {
               <Card
                 title={item.name}
                 cover={
-                  <img
-                    alt="example"
-                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                  />
+                  <Carousel arrows infinite={false}>
+                    {item.utils.map((utility, index) => (
+                      <img
+                        key={index}
+                        alt="example"
+                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                      />
+                    ))}
+                  </Carousel>
                 }
               >
                 <p>
@@ -40,13 +45,11 @@ function ListRoom() {
                 <p>
                   Số người : <strong> {item.quantity_bed}</strong>
                 </p>
+                Dịch vụ :
                 <p>
-                  Dịch vụ :
-                  <p>
-                    {item.utils.map((utility, index) => (
-                      <Tag key={index}>{utility}</Tag>
-                    ))}
-                  </p>
+                  {item.utils.map((utility, index) => (
+                    <Tag key={index}>{utility}</Tag>
+                  ))}
                 </p>
                 <p>
                   {item.status ? (

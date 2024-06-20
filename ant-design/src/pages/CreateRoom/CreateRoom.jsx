@@ -7,7 +7,10 @@ import {
   Col,
   Select,
   Switch,
+  Upload,
 } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+
 import { createRoom } from "../../service/roomService";
 const { Option } = Select;
 const CreateRoom = () => {
@@ -133,7 +136,7 @@ const CreateRoom = () => {
           </Col>
         </Row>
         <Row gutter={[20, 20]}>
-          <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Form.Item
               label="Loại phòng"
               name="type_room"
@@ -147,6 +150,27 @@ const CreateRoom = () => {
               />
             </Form.Item>
           </Col>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            {/* <Form.Item
+              label="Ảnh phòng"
+              name="images"
+              valuePropName="checked"
+              initialValue={false}
+            >
+              <Upload listType="picture" maxCount={3} multiple>
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  Upload (Max: 3)
+                </Button>
+              </Upload>
+            </Form.Item> */}
+          </Col>
+        </Row>
+        <Row>
           <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
             <Form.Item label="Mô tả" name="description">
               <Input.TextArea

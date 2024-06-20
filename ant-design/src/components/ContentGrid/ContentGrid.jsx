@@ -1,5 +1,6 @@
-import { Col, Row } from "antd";
+import { Carousel, Col, Row } from "antd";
 import CardItem from "../CardItem/CardItem";
+import "./ContentGrid.css";
 // link giao diện : https://enlink.themenate.net/dashboard/default
 function ContentGird() {
   return (
@@ -55,6 +56,22 @@ function ContentGird() {
           <CardItem title="Box 11" style={{ height: "400px" }} />
         </Col>
       </Row>
+      <Carousel
+        arrows
+        autoplay={true}
+        dotPosition="bottom"
+        dots={true}
+        effect="fade"
+      >
+        {/* Mặc định
+        dotPosition="bottom"
+        dots={true} */}
+        <div className="slider-item">1</div>
+        <div className="slider-item">2</div>
+        <div className="slider-item">3</div>
+        <div className="slider-item">4</div>
+        <div className="slider-item">5</div>
+      </Carousel>
     </>
   );
 }
