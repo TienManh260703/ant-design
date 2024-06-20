@@ -14,7 +14,7 @@ const CreateRoom = () => {
   const [form] = Form.useForm();
 
   const handleSubmit = async (values) => {
-    // console.log(values);
+    console.log(values);
     const response = await createRoom(values);
     console.log("Room response : ", response);
     if (response) {
@@ -133,6 +133,20 @@ const CreateRoom = () => {
           </Col>
         </Row>
         <Row gutter={[20, 20]}>
+          <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
+            <Form.Item
+              label="Loại phòng"
+              name="type_room"
+              valuePropName="checked"
+              initialValue={false}
+            >
+              <Switch
+                checkedChildren="VIP"
+                unCheckedChildren="Thường"
+                defaultChecked
+              />
+            </Form.Item>
+          </Col>
           <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
             <Form.Item label="Mô tả" name="description">
               <Input.TextArea

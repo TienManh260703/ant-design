@@ -27,6 +27,7 @@ public class RoomController {
                 .price(roomDTO.getPrice())
                 .utils(roomDTO.getUtils())
                 .description(roomDTO.getDescription())
+                .typeRoom(roomDTO.getTypeRoom())
                 .status(roomDTO.getStatus())
                 .build();
         Room r = roomRepository.save(room);

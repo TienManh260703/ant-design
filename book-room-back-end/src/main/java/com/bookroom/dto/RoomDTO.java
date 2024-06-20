@@ -24,6 +24,8 @@ public class RoomDTO {
     Float price;
     List<String> utils;
     String description;
+    @JsonProperty("type_room")
+    Boolean typeRoom;
     Boolean status;
 
     public RoomDTO transRoom(Room room) {
@@ -35,6 +37,7 @@ public class RoomDTO {
                 .price(room.getPrice())
                 .utils(room.getUtils())
                 .description(room.getDescription())
+                .typeRoom(room.getTypeRoom())
                 .status(room.getStatus())
                 .build();
     }

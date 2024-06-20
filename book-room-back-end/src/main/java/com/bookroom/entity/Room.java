@@ -20,10 +20,14 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
     String name;
+    @Column(name = "quantity_bed")
     Integer quantityBed;
+    @Column(name = "quantity_people")
     Integer quantityPeople;
     Float price;
     List<String> utils;
     String description;
-    Boolean status= false;
+    @Column(name = "type_room")
+    Boolean typeRoom;
+    Boolean status;
 }
