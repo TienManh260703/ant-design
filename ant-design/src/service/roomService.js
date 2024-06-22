@@ -29,3 +29,23 @@ export const deletedRoom = async (id) => {
     throw error;
   }
 };
+
+export const viewEditRoom = async (id) => {
+  try {
+    const result = await get(`rooms/view-edit-room/${id}`);
+    return result;
+  } catch (error) {
+    console.error("Erro get room");
+    throw error;
+  }
+};
+
+export const updateRoom = async (id, options) => {
+  try {
+    const result = await patch(`rooms/update-rooms/${id}`, options);
+    return result;
+  } catch (error) {
+    console.error("Erro update room");
+    throw error;
+  }
+};

@@ -1,5 +1,6 @@
 import { Table, Tag, Tooltip } from "antd";
 import ButtonDelete from "./ButtonDelete";
+import EditRoom from "./EditRoom";
 
 function RoomTable(props) {
   const { rooms, onReload } = props;
@@ -94,7 +95,10 @@ function RoomTable(props) {
       title: "Aciton",
       key: "action",
       render: (_, recoder) => (
-        <ButtonDelete recoder={recoder} onReload={onReload} />
+        <>
+          <ButtonDelete recoder={recoder} onReload={onReload} />
+          <EditRoom recoder={recoder} onReload={onReload} />
+        </>
       ),
     },
   ];

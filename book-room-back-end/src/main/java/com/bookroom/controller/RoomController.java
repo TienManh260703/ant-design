@@ -43,6 +43,28 @@ public class RoomController {
         ).toList());
     }
 
+    @GetMapping("view-edit-room/{id}")
+    public ResponseEntity<?> editRoom (@PathVariable String id ){
+        Room room = roomRepository.findById(id).get();
+        return ResponseEntity.ok(RoomDTO.builder().build().transRoom(room));
+    }
+    @PatchMapping("update-rooms/{id}")
+    public  ResponseEntity<?> updateRoom(
+            @PathVariable String id,
+            @RequestBody RoomDTO roomDTO){
+        Room existingRoom = roomRepository.findById(id).get();
+        existingRoom.setName(roomDTO.getName());
+        existingRoom.setQuantityBed(roomDTO.getQuantityBed());
+        existingRoom.setQuantityPeople(roomDTO.getQuantityPeople());
+        existingRoom.setPrice(roomDTO.getPrice());
+        existingRoom.setUtils(roomDTO.getUtils());
+        existingRoom.setDescription(roomDTO.getDescription());
+        existingRoom.setTypeRoom(roomDTO.getTypeRoom());
+        existingRoom.setStatus(roomDTO.getStatus());
+        Room response = roomRepository.save(existingRoom);
+        return ResponseEntity.ok(RoomDTO.builder().build().transRoom(response));
+    }
+
     @DeleteMapping("deleted/{id}")
     public ResponseEntity<?> deleteRoom(@PathVariable String id) {
         Optional<Room> roomOptional = roomRepository.findById(id);
