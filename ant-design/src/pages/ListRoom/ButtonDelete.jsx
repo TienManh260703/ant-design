@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Popconfirm } from "antd";
+import { Button, Popconfirm, message } from "antd";
 import { deletedRoom } from "../../service/roomService";
 
 function ButtonDelete(props) {
@@ -10,9 +10,9 @@ function ButtonDelete(props) {
     const response = await deletedRoom(recoder.id);
     if (response) {
       onReload();
-      alert("Xóa bản ghi thành công");
+      message.success("Xóa bản ghi thành công");
     } else {
-      alert("Xóa bản ghi không thành công");
+      message.error("Xóa bản ghi thất bại");
     }
   };
   return (

@@ -1,7 +1,20 @@
+import { Result, Button } from "antd";
+import { Link } from "react-router-dom";
 function Error404() {
   return (
     <>
-      <h1 style={{ color: "red" }}>404 Not found</h1>
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the page you visited does not exist."
+        extra={
+          <Button type="primary">
+            <Link to={"/"} type="dange">
+              Back Home
+            </Link>
+          </Button>
+        }
+      />
     </>
   );
 }
