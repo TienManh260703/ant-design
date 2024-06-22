@@ -8,8 +8,8 @@ import {
   Select,
   Switch,
   Upload,
+  message,
 } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 
 import { createRoom } from "../../service/roomService";
 const { Option } = Select;
@@ -22,6 +22,9 @@ const CreateRoom = () => {
     console.log("Room response : ", response);
     if (response) {
       form.resetFields();
+      message.success("Tạo mới phòng thành công");
+    } else {
+      message.error("Tạo mới phòng thất bại");
     }
   };
   return (
