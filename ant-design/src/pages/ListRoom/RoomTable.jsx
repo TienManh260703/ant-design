@@ -1,8 +1,8 @@
 import { Button, Table, Tag } from "antd";
 import ButtonDelete from "./ButtonDelete";
 
-function RoomList(props) {
-  const { rooms } = props;
+function RoomTable(props) {
+  const { rooms, onReload } = props;
   const columns = [
     {
       title: "Tên phòng",
@@ -75,7 +75,9 @@ function RoomList(props) {
     {
       title: "Aciton",
       key: "action",
-      render: (_, recoder) => <ButtonDelete recoder={recoder} />,
+      render: (_, recoder) => (
+        <ButtonDelete recoder={recoder} onReload={onReload} />
+      ),
     },
   ];
   return (
@@ -85,4 +87,4 @@ function RoomList(props) {
   );
 }
 
-export default RoomList;
+export default RoomTable;

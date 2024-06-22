@@ -3,12 +3,13 @@ import { Button, Popconfirm } from "antd";
 import { deletedRoom } from "../../service/roomService";
 
 function ButtonDelete(props) {
-  const { recoder } = props;
+  const { recoder, onReload } = props;
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     console.log(recoder.id);
-    const response = deletedRoom(recoder.id);
+    const response = await deletedRoom(recoder.id);
     if (response) {
+      onReload();
       alert("Xóa bản ghi thành công");
     } else {
       alert("Xóa bản ghi không thành công");
