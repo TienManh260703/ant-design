@@ -8,7 +8,7 @@ import {
   Row,
   Select,
   Switch,
-  message,
+  notification,
 } from "antd";
 const { Option } = Select;
 import { EditOutlined } from "@ant-design/icons";
@@ -16,7 +16,7 @@ import { useState } from "react";
 import { updateRoom } from "../../service/roomService";
 function EditRoom(props) {
   const { recoder, onReload } = props;
-  console.log(recoder);
+  //   console.log(recoder);
   const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
 
@@ -31,12 +31,24 @@ function EditRoom(props) {
   const handleSubmit = async (values) => {
     console.log(values);
     const response = await updateRoom(recoder.id, values);
+
     if (response) {
-      message.success("Update thành công");
+      //   message.success("Update thành công");
+      notification.success({
+        message: "Cập nhật thành công",
+        description: `Thông tin phòng: ${values.name}`,
+        showProgress: true,
+        duration: 2,
+      });
       setShowModal(false);
       onReload();
     } else {
-      message.error("Update thất bại");
+      notification.error({
+        message: "Cập nhật không thành công",
+        description: `Thông tin phòng: ${values.name}`,
+        showProgress: true,
+        duration: 2,
+      });
     }
   };
   return (
