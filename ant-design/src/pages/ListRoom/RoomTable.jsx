@@ -1,4 +1,4 @@
-import { Button, Table, Tag } from "antd";
+import { Table, Tag, Tooltip } from "antd";
 import ButtonDelete from "./ButtonDelete";
 
 function RoomTable(props) {
@@ -38,13 +38,23 @@ function RoomTable(props) {
       render: (_, { type_room }) => (
         <>
           {type_room ? (
-            <Tag color="gold" key={type_room}>
-              VIP
-            </Tag>
+            <>
+              <Tooltip title="Phòng VIP chuẩn 5 sao" color="yellow">
+                <Tag color="gold" key={type_room}>
+                  VIP
+                </Tag>
+              </Tooltip>
+            </>
           ) : (
-            <Tag color="processing" key={type_room}>
-              Thường
-            </Tag>
+            <Tooltip
+              title="Phòng thường chuẩn 3 sao"
+              placement="topLeft"
+              color="blue"
+            >
+              <Tag color="processing" key={type_room}>
+                Thường
+              </Tag>
+            </Tooltip>
           )}
         </>
       ),
@@ -61,13 +71,21 @@ function RoomTable(props) {
       render: (_, { status }) => (
         <>
           {status ? (
-            <Tag color="success" key={status}>
-              Hoạt động
-            </Tag>
+            <>
+              <Tooltip title="Chưa có khách đặt" color="green">
+                <Tag color="success" key={status}>
+                  Còn phòng
+                </Tag>
+              </Tooltip>
+            </>
           ) : (
-            <Tag color="error" key={status}>
-              Tạm ngưng
-            </Tag>
+            <>
+              <Tooltip title="Phòng đã có khách đặt" color="red">
+                <Tag color="error" key={status}>
+                  Hết phòng
+                </Tag>
+              </Tooltip>
+            </>
           )}
         </>
       ),

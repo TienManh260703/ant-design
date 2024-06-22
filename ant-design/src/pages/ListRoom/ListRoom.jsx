@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getListRoom } from "../../service/roomService";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { UnorderedListOutlined, AppstoreOutlined } from "@ant-design/icons";
 import RoomGird from "./RoomGird";
 import RoomTable from "./RoomTable";
@@ -26,12 +26,22 @@ function ListRoom() {
 
   return (
     <>
-      <Button onClick={() => setGird(true)}>
-        <UnorderedListOutlined />
-      </Button>
-      <Button onClick={() => setGird(false)}>
-        <AppstoreOutlined />
-      </Button>
+      <Tooltip title="Hiển thị dang Grid" color="grey" placement="left">
+        <Button onClick={() => setGird(true)}>
+          <UnorderedListOutlined />
+        </Button>
+      </Tooltip>
+      <Tooltip
+        overlayClassName="Định nghĩa class name"
+        title="Hiển thị dạng Table"
+        color="grey"
+        placement="right"
+      >
+        <Button onClick={() => setGird(false)}>
+          <AppstoreOutlined />
+        </Button>
+      </Tooltip>
+
       {isGird ? (
         <>
           <RoomGird rooms={rooms} />
