@@ -68,6 +68,11 @@ function MenuSlider() {
       key: "/list-room",
       icon: <PlusCircleOutlined />,
     },
+    {
+      label: <Link to="/test-date">Test Date</Link>,
+      key: "/test-date",
+      icon: <PlusCircleOutlined />,
+    },
   ];
   return (
     // items : Danh sách menu hiển thị
