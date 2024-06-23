@@ -23,12 +23,24 @@ function MultiLine() {
     xField: "year",
     yField: "value",
     smooth: true,
-    // point: true,
+    point: true,
     slider: {
-      start: 0,
-      end: 1,
+      x: 0,
+      y: 1,
     },
-    seriesField: "category",
+
+    // chạy oke
+    // slider: {
+    //   start: 0,
+    //   end: 1,
+    //   trendCfg: {
+    //     isArea: true,
+    //   },
+    // },
+    // chưa dùng được
+    colorField: "category",
+
+    // seriesField: "category",
   };
   //   Chưa đổi đc màu cho các line
   return (
