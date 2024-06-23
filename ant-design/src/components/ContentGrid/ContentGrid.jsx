@@ -1,4 +1,4 @@
-import { Carousel, Col, Row, Collapse, Image, Tabs } from "antd";
+import { Carousel, Col, Row, Collapse, Image, Tabs, QRCode } from "antd";
 import CardItem from "../CardItem/CardItem";
 import "./ContentGrid.css";
 import TabPane from "antd/es/tabs/TabPane";
@@ -148,6 +148,11 @@ function ContentGird() {
           </TabPane>
         ))}
       </Tabs>
+      <QRCode
+        errorLevel="H"
+        value="https://ant.design/"
+        icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+      />
     </>
   );
 }

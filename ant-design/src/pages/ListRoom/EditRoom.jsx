@@ -7,6 +7,7 @@ import {
   Modal,
   Row,
   Select,
+  Spin,
   Switch,
   notification,
 } from "antd";
@@ -20,6 +21,8 @@ function EditRoom(props) {
   const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
 
+  const [spinning, setSpinning] = useState(false);
+
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
@@ -29,27 +32,31 @@ function EditRoom(props) {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
+    setSpinning(true);
     const response = await updateRoom(recoder.id, values);
 
-    if (response) {
-      //   message.success("Update thành công");
-      notification.success({
-        message: "Cập nhật thành công",
-        description: `Thông tin phòng: ${values.name}`,
-        showProgress: true,
-        duration: 2,
-      });
-      setShowModal(false);
-      onReload();
-    } else {
-      notification.error({
-        message: "Cập nhật không thành công",
-        description: `Thông tin phòng: ${values.name}`,
-        showProgress: true,
-        duration: 2,
-      });
-    }
+    setTimeout(() => {
+      if (response) {
+        //   message.success("Update thành công");
+        notification.success({
+          message: "Cập nhật thành công",
+          description: `Thông tin phòng: ${values.name}`,
+          showProgress: true,
+          duration: 2,
+        });
+        setShowModal(false);
+        onReload();
+      } else {
+        notification.error({
+          message: "Cập nhật không thành công",
+          description: `Thông tin phòng: ${values.name}`,
+          showProgress: true,
+          duration: 2,
+        });
+      }
+      setSpinning(false);
+    }, 2000);
   };
   return (
     <>
@@ -64,136 +71,138 @@ function EditRoom(props) {
         icon={<EditOutlined />}
         onClick={handleShowModal}
       />
+
       <Modal
         title="Edit Room"
         open={showModal}
         onCancel={handleCancel}
         footer={null}
       >
-        <Form
-          name="edit-room-form"
-          layout="vertical"
-          onFinish={handleSubmit}
-          form={form}
-          initialValues={recoder}
-        >
-          <Row gutter={[20, 20]}>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Tên phòng"
-                name="name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Tên phòng không được để trống",
-                  },
-                  // {
-                  //   pattern: /^[a-zA-Z\s]+$/,
-                  //   message: "Tên phòng chỉ được chứa chữ cái",
-                  // },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Số lượng giường"
-                name="quantity_bed"
-                rules={[
-                  {
-                    required: true,
-                    message: "Số giường không được để trống",
-                  },
-                ]}
-              >
-                <InputNumber min={1} max={10} style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={[20, 20]}>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Số người tối đa"
-                name="quantity_people"
-                rules={[
-                  {
-                    required: true,
-                    message: "Số lượng người tối đa không được để trống",
-                  },
-                ]}
-              >
-                <InputNumber min={1} max={20} style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Giá phòng"
-                name="price"
-                rules={[
-                  {
-                    required: true,
-                    message: "Giá phòng không được để trống",
-                  },
-                ]}
-              >
-                <InputNumber min={1} style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={[20, 20]}>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                name="utils"
-                label="Tiện ích"
-                rules={[
-                  {
-                    required: true,
-                    message: "Chọn ít nhất 1 dịch vụ",
-                  },
-                ]}
-              >
-                <Select
-                  mode="multiple"
-                  allowClear={true}
-                  placeholder="Chọn tiện ích"
-                  style={{
-                    width: "100%",
-                  }}
+        <Spin spinning={spinning} tip="Đang cập nhập...">
+          <Form
+            name="edit-room-form"
+            layout="vertical"
+            onFinish={handleSubmit}
+            form={form}
+            initialValues={recoder}
+          >
+            <Row gutter={[20, 20]}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Tên phòng"
+                  name="name"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Tên phòng không được để trống",
+                    },
+                    // {
+                    //   pattern: /^[a-zA-Z\s]+$/,
+                    //   message: "Tên phòng chỉ được chứa chữ cái",
+                    // },
+                  ]}
                 >
-                  <Option value="Wifi">Wifi</Option>
-                  <Option value="Nóng lạnh">Nóng lạnh</Option>
-                  <Option value="Điều hòa">Điều hòa</Option>
-                  <Option value="Tủ lạnh">Tủ lạnh</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Trạng thái"
-                name="status"
-                valuePropName="checked"
-              >
-                <Switch></Switch>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={[20, 20]}>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              <Form.Item
-                label="Loại phòng"
-                name="type_room"
-                valuePropName="checked"
-              >
-                <Switch
-                  checkedChildren="VIP"
-                  unCheckedChildren="Thường"
-                  defaultChecked
-                />
-              </Form.Item>
-            </Col>
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
-              {/* <Form.Item
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Số lượng giường"
+                  name="quantity_bed"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Số giường không được để trống",
+                    },
+                  ]}
+                >
+                  <InputNumber min={1} max={10} style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={[20, 20]}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Số người tối đa"
+                  name="quantity_people"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Số lượng người tối đa không được để trống",
+                    },
+                  ]}
+                >
+                  <InputNumber min={1} max={20} style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Giá phòng"
+                  name="price"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Giá phòng không được để trống",
+                    },
+                  ]}
+                >
+                  <InputNumber min={1} style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={[20, 20]}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  name="utils"
+                  label="Tiện ích"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Chọn ít nhất 1 dịch vụ",
+                    },
+                  ]}
+                >
+                  <Select
+                    mode="multiple"
+                    allowClear={true}
+                    placeholder="Chọn tiện ích"
+                    style={{
+                      width: "100%",
+                    }}
+                  >
+                    <Option value="Wifi">Wifi</Option>
+                    <Option value="Nóng lạnh">Nóng lạnh</Option>
+                    <Option value="Điều hòa">Điều hòa</Option>
+                    <Option value="Tủ lạnh">Tủ lạnh</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Trạng thái"
+                  name="status"
+                  valuePropName="checked"
+                >
+                  <Switch></Switch>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={[20, 20]}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                <Form.Item
+                  label="Loại phòng"
+                  name="type_room"
+                  valuePropName="checked"
+                >
+                  <Switch
+                    checkedChildren="VIP"
+                    unCheckedChildren="Thường"
+                    defaultChecked
+                  />
+                </Form.Item>
+              </Col>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+                {/* <Form.Item
               label="Ảnh phòng"
               name="images"
               valuePropName="checked"
@@ -210,29 +219,30 @@ function EditRoom(props) {
                 </Button>
               </Upload>
             </Form.Item> */}
-            </Col>
-          </Row>
-          <Row>
-            <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
-              <Form.Item label="Mô tả" name="description">
-                <Input.TextArea
-                  showCount
-                  maxLength={100}
-                  style={{ width: "100%" }}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Cập nhập
-                </Button>
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
+              </Col>
+            </Row>
+            <Row>
+              <Col xxl={24} xl={24} lg={24} md={12} sm={24} xs={24}>
+                <Form.Item label="Mô tả" name="description">
+                  <Input.TextArea
+                    showCount
+                    maxLength={100}
+                    style={{ width: "100%" }}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col xxl={24} xl={24} lg={24} md={24} sm={24} xs={24}>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Cập nhập
+                  </Button>
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Spin>
       </Modal>
     </>
   );
