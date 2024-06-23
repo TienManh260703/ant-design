@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import BasicLine from "../../components/BasicLine/BasicLine";
 import CardItem from "../../components/CardItem/CardItem";
 import MultiLine from "../../components/MultiLine/MultiLine";
+import StepLine from "../../components/StepLine/StepLine";
 
 function Charts() {
   return (
@@ -17,6 +18,14 @@ function Charts() {
       <Row gutter={[20, 20]}>
         <Col xxl={16} xl={16} lg={16} md={16} sm={24} xs={24}>
           <MultiLine />
+        </Col>
+        <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
+          <CardItem style={{ height: "400px" }} />
+        </Col>
+      </Row>
+      <Row gutter={[20, 20]} className="mt-20">
+        <Col xxl={16} xl={16} lg={16} md={16} sm={24} xs={24}>
+          <StepLine />
         </Col>
         <Col xxl={8} xl={8} lg={8} md={8} sm={24} xs={24}>
           <CardItem style={{ height: "400px" }} />
