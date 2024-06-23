@@ -3,6 +3,7 @@ import CardItem from "../CardItem/CardItem";
 import "./ContentGrid.css";
 import TabPane from "antd/es/tabs/TabPane";
 import ContentTab from "../ContentTab/ContentTab";
+import BasicLine from "../BasicLine/BasicLine";
 
 const { Panel } = Collapse;
 // link giao diện : https://enlink.themenate.net/dashboard/default
@@ -76,7 +77,8 @@ function ContentGird() {
       <Row gutter={[20, 20]} className="mt-20">
         {/* Total Revenue  */}
         <Col xxl={16} xl={16} lg={16} md={24} sm={24} xs={24}>
-          <CardItem title="Box 5" style={{ height: "400px" }} />
+          {/* <CardItem title="Box 5" style={{ height: "400px" }}></CardItem> */}
+          <BasicLine />
         </Col>
         {/* Customers  */}
         <Col xxl={8} xl={8} lg={8} md={24} sm={24} xs={24}>
