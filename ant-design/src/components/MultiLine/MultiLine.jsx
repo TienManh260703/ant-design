@@ -1,16 +1,15 @@
 import { Line } from "@ant-design/plots";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./BasicLine.css";
-function BasicLine() {
+function MultiLine() {
   const [dataChart, setDataChart] = useState([]);
 
   useEffect(() => {
     const callApi = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/basic-line");
+        const response = await axios.get("http://localhost:3000/multi-line");
         setDataChart(response.data);
-        console.log("Data fetched:", response.data);
+        console.log("Data mulyi:", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -21,30 +20,24 @@ function BasicLine() {
 
   const config = {
     data: dataChart,
-    xField: "date",
-    yField: "quantity",
-    // autoFit : false,
-    // height: 395,
+    xField: "year",
+    yField: "value",
     smooth: true,
-    point: true,
+    // point: true,
     slider: {
       start: 0,
       end: 1,
     },
-    // meta: {
-    //   quantity: {
-    //     alias: "Số lượng",
-    //   },
-    // },
+    seriesField: "category",
   };
-  console.log("Rendered dataChart:", dataChart);
+  //   Chưa đổi đc màu cho các line
   return (
     <>
       <div className="item">
-        <Line {...config} />
+        <Line {...config}></Line>
       </div>
     </>
   );
 }
 
-export default BasicLine;
+export default MultiLine;

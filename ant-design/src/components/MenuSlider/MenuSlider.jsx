@@ -73,6 +73,11 @@ function MenuSlider() {
       key: "/test-date",
       icon: <PlusCircleOutlined />,
     },
+    {
+      label: <Link to="/charts">Charts</Link>,
+      key: "/charts",
+      icon: <PlusCircleOutlined />,
+    },
   ];
   return (
     // items : Danh sách menu hiển thị
