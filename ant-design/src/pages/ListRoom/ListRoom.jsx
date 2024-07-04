@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getListRoom } from "../../service/roomService";
 import { Button, Tooltip } from "antd";
 import { UnorderedListOutlined, AppstoreOutlined } from "@ant-design/icons";
+import webSocketService from "../../utils/WebSocketService";
 import RoomGird from "./RoomGird";
 import RoomTable from "./RoomTable";
 
@@ -17,6 +18,21 @@ function ListRoom() {
 
   useEffect(() => {
     fetchApi();
+
+    // Kết nối tới WebSocket server khi component được mount
+    webSocketService.connect();
+
+    // Đăng ký để lắng nghe thông báo từ topic "/topic/rooms"
+    webSocketService.subscribe("/topic/rooms", (message) => {
+      console.log("Received message from server:", message.body);
+      fetchApi();
+    });
+
+    // Cleanup khi component bị unmount
+    return () => {
+      webSocketService.unsubscribe("/topic/rooms");
+      webSocketService.disconnect();
+    };
   }, []);
 
   const handleReload = () => {

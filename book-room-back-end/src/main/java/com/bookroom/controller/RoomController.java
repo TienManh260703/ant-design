@@ -3,11 +3,14 @@ package com.bookroom.controller;
 import com.bookroom.dto.RoomDTO;
 import com.bookroom.entity.Room;
 import com.bookroom.repository.RoomRepository;
+import com.bookroom.service.WebSocketService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -19,7 +22,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class RoomController {
     RoomRepository roomRepository;
-
+    WebSocketService webSocketService;
     @PostMapping("add")
     public ResponseEntity<?> create(@RequestBody RoomDTO roomDTO) {
         Room room = Room.builder()
@@ -64,15 +67,18 @@ public class RoomController {
         Room response = roomRepository.save(existingRoom);
         return ResponseEntity.ok(RoomDTO.builder().build().transRoom(response));
     }
-
     @DeleteMapping("deleted/{id}")
     public ResponseEntity<?> deleteRoom(@PathVariable String id) {
         Optional<Room> roomOptional = roomRepository.findById(id);
         if (roomOptional.isPresent()) {
             roomRepository.deleteById(id);
-            return ResponseEntity.ok("Success");
+            webSocketService.sendMessage("/app/deleteRoom", id);
 
+            return ResponseEntity.ok("Success");
         }
         return ResponseEntity.ok("Error");
     }
+
+
+
 }

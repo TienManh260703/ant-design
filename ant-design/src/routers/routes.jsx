@@ -6,6 +6,7 @@ import CreateRoom from "../pages/CreateRoom/CreateRoom";
 import ListRoom from "../pages/ListRoom/ListRoom";
 import TestDate from "../pages/TestDate/TestDate";
 import Charts from "../pages/Charts/Charts";
+import GiaoHangNhanh from "../pages/GHN";
 export const routes = [
   {
     path: "/",
@@ -34,6 +35,10 @@ export const routes = [
       {
         path: "/charts",
         element: <Charts />,
+      },
+      {
+        path: "/orders",
+        element: <GiaoHangNhanh />,
       },
       {
         path: "*",

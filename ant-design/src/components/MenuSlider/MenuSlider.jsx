@@ -78,6 +78,11 @@ function MenuSlider() {
       key: "/charts",
       icon: <PlusCircleOutlined />,
     },
+    {
+      label: <Link to="/orders">GHN - Express</Link>,
+      key: "/orders",
+      icon: <PlusCircleOutlined />,
+    },
   ];
   return (
     // items : Danh sách menu hiển thị
