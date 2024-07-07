@@ -1,4 +1,6 @@
 import { Form, DatePicker, Button } from "antd";
+import { useEffect } from "react";
+import { getSP } from "../../service/sanPhamService";
 const { RangePicker } = DatePicker;
 function TestDate() {
   const handleSubmit = (data) => {
@@ -21,6 +23,19 @@ function TestDate() {
     }
     return Promise.resolve();
   };
+  /// demo call api SP
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getSP("/api/san-pham/");
+        console.log("GET response:", result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <Form name="all-date" onFinish={handleSubmit}>

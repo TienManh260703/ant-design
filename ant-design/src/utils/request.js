@@ -60,3 +60,13 @@ export const patch = async (path, data) => {
     throw error;
   }
 };
+
+export const put = async (path, data) => {
+  try {
+    const response = await axiosInstance.put(path, data);
+    return response.data;
+  } catch (error) {
+    console.error("PUT request error:", error);
+    throw error;
+  }
+};

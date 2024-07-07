@@ -1,4 +1,4 @@
-import { Button, Col, Modal, notification, Row } from "antd";
+import { Button, Col, Modal, notification, Pagination, Row } from "antd";
 import FormPGG from "../../components/FormPGG";
 import { useEffect, useState } from "react";
 import PGGTable from "../../components/PGGTable";
@@ -7,28 +7,39 @@ import { getPGGPage } from "../../service/phieuGiamGiaService";
 function PGGPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [listPhieuGiamGia, setListPhieuGiamGia] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [size, setSize] = useState(5);
+  const [totalItems, setTotalItems] = useState(0);
 
-  const fetchApi = async () => {
-    const response = await getPGGPage();
+  const fetchApi = async (page = currentPage, size = size) => {
+    const response = await getPGGPage(page, size);
     console.log("API Response:", response);
+
     if (response.status_code === 200) {
       setListPhieuGiamGia(response.data.result);
+      setCurrentPage(response.data.meta.page + 1);
+      setSize(response.data.meta.pageSize);
+      setTotalItems(response.data.meta.total);
     } else {
       notification.error({
         message: "Error",
-        description: "Api get dach sách lỗi",
+        description: "Failed to fetch data from API",
       });
     }
   };
 
   useEffect(() => {
-    fetchApi();
-  }, []);
+    fetchApi(currentPage, size);
+  }, [currentPage, size]);
 
-  const handleReload = () => {
-    fetchApi();
+  const handlePageChange = (page, pageSize) => {
+    setCurrentPage(page);
+    setSize(pageSize);
   };
 
+  const handleReload = () => {
+    fetchApi(currentPage, size);
+  };
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -60,10 +71,24 @@ function PGGPage() {
             onReload={handleReload}
           />
         </Col>
+        <Col
+          style={{
+            marginTop: "10px",
+          }}
+        >
+          <Pagination
+            current={currentPage}
+            pageSize={size}
+            total={totalItems}
+            onChange={handlePageChange}
+            showSizeChanger
+            pageSizeOptions={["5", "10", "20"]}
+          />
+        </Col>
       </Row>
       <Modal
         footer={null}
-        width={1200}
+        width={1300}
         title="Thông tin phiếu giảm giá"
         open={isModalOpen}
         onOk={handleOk}
@@ -71,7 +96,7 @@ function PGGPage() {
       >
         <Row>
           <Col>
-            <FormPGG />
+            <FormPGG cancel={handleCancel} onReload={handleReload} />
           </Col>
           <Col></Col>
         </Row>
