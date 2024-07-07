@@ -1,0 +1,23 @@
+/* sau đinh nghĩa ra main.jsx */
+
+.p-10 {
+  padding: 10px;
+}
+.mb-8 {
+  margin-bottom: 8px;
+}
+.ms-10 {
+  margin-left: 10px;
+}
+.d-flex {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+.ms-5 {
+  margin-left: 10px;
+}
+
+.br-10 {
+  border-radius: 10px;
+}

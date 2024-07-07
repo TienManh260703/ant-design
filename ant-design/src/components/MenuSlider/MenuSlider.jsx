@@ -83,6 +83,16 @@ function MenuSlider() {
       key: "/orders",
       icon: <PlusCircleOutlined />,
     },
+    {
+      label: <Link to="/employee">Nhan vien</Link>,
+      key: "/employee",
+      icon: <PlusCircleOutlined />,
+    },
+    {
+      label: <Link to="/pgg">PGG</Link>,
+      key: "/pgg",
+      icon: <PlusCircleOutlined />,
+    },
   ];
   return (
     // items : Danh sách menu hiển thị

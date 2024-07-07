@@ -7,6 +7,8 @@ import ListRoom from "../pages/ListRoom/ListRoom";
 import TestDate from "../pages/TestDate/TestDate";
 import Charts from "../pages/Charts/Charts";
 import GiaoHangNhanh from "../pages/GHN";
+import EmployeePage from "../pages/Employee";
+import PGGPage from "../pages/PGG";
 export const routes = [
   {
     path: "/",
@@ -39,6 +41,14 @@ export const routes = [
       {
         path: "/orders",
         element: <GiaoHangNhanh />,
+      },
+      {
+        path: "/employee",
+        element: <EmployeePage />,
+      },
+      {
+        path: "/pgg",
+        element: <PGGPage />,
       },
       {
         path: "*",

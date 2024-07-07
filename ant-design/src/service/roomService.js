@@ -3,7 +3,7 @@ import { get, post, del, patch } from "../utils/request";
 export const createRoom = async (room) => {
   try {
     const result = await post("rooms/add", room);
-    return result.data;
+    return result;
   } catch (error) {
     console.error("Error creating room:");
     throw error;
@@ -13,7 +13,8 @@ export const createRoom = async (room) => {
 export const getListRoom = async () => {
   try {
     const result = await get("rooms");
-    return result.data;
+    console.log("GET response:", result);
+    return result;
   } catch (error) {
     console.log("Error get room:");
     throw error;
